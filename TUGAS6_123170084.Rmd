@@ -1,0 +1,80 @@
+---
+title: "Tugas Modul 6"
+author: "Salsabila Lattifa Fikri"
+date: "3/11/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+##Manipulasi data frame
+##No 1
+library(dplyr)
+library(dslabs)
+library(tidyverse)
+data("murders")
+
+data("murders")
+murders <- mutate(murders,rate = total / population * 100000)
+head(murders)
+```
+
+```{r}
+##No 2
+murders <- mutate(murders,ranking = rank(rate))
+head(murders)
+```
+
+```{r}
+##No 3
+select(murders, state, abb) %>% head()
+```
+
+```{r}
+##No 4
+murders %>% filter(rate > 5 ) %>% select(state)
+```
+
+```{r}
+##No 5
+murders %>% filter( rate <= 1) %>% select(state,rate,ranking)
+```
+
+```{r}
+##Operator pipe
+##No 1
+data("murders")
+my_state <- murders %>%
+mutate(rate = total / population * 100000) %>%
+filter(rate <= 1) %>%
+select(state,rate)
+
+my_state
+```
+
+```{r}
+##Tampilkan semua data murders yang memiliki tingkat pembunuhan kurang dari 2 dan diurutkan berdasarkan populasinya
+##No 2
+data("murders")
+data_m <- murders %>%
+mutate(rate = total / population * 100000) %>%
+filter(rate <= 2,rank(population)) %>%
+select(state,population,rate,total)
+data_m
+```
+
+```{r}
+##Tampilkan nilai tengah data laki-laki dan perempuan dari data heights
+##No 3
+data("heights")
+s <- heights %>% filter(sex == "Female") %>% summarise(average = mean(height), standar_deviation = sd(height))
+s
+```
+
+```{r}
+##Tampilkan 20 data tertinggi perempuan yang diurutkan dari terkecil hingga terbesar (ascending )dan hitung rata-rata dari 20 data tersebut
+##No 4
+```
